@@ -70,6 +70,7 @@ digraph brainstorming {
 - Prefer multiple choice questions when possible, but open-ended is fine too
 - Only one question per message - if a topic needs more exploration, break it into multiple questions
 - Focus on understanding: purpose, constraints, success criteria
+- Ask about testing stance early: does the user want tests written at all, and if so test-first or after implementation? This is their preference, not a skill default.
 
 **Exploring approaches:**
 
@@ -82,7 +83,7 @@ digraph brainstorming {
 - Once you believe you understand what you're building, present the design
 - Scale each section to its complexity: a few sentences if straightforward, up to 200-300 words if nuanced
 - Ask after each section whether it looks right so far
-- Cover: architecture, components, data flow, error handling, testing
+- Cover: architecture, components, data flow, error handling, and verification — how we'll know it works (a runnable command, existing tests, a manual check, or new tests, matching the user's stated testing stance). Do not assume TDD.
 - Be ready to go back and clarify if something doesn't make sense
 
 **Design for isolation and clarity:**
@@ -127,6 +128,7 @@ Wait for the user's response. If they request changes, make them and re-run the 
 **Implementation:**
 
 - Invoke the writing-plans skill to create a detailed implementation plan
+- Pass along the user's testing stance (or that no tests are wanted) so the plan's tasks and verification steps match.
 - Do NOT invoke any other skill. writing-plans is the next step.
 
 ## Key Principles

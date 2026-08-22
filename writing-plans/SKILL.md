@@ -7,9 +7,9 @@ description: Use when you have a spec or requirements for a multi-step task, bef
 
 ## Overview
 
-Write comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, how to test it. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD. Frequent commits unless the user opts out (not for plan docs).
+Write comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, docs they might need to check, and how to verify it works. Give them the whole plan as bite-sized tasks. DRY. YAGNI. Frequent commits unless the user opts out (not for plan docs).
 
-Assume they are a skilled developer, but know almost nothing about our toolset or problem domain. Assume they don't know good test design very well.
+Assume they are a skilled developer, but know almost nothing about our toolset or problem domain.
 
 **Announce at start:** "I'm using the writing-plans skill to create the implementation plan."
 
@@ -18,7 +18,15 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 ## Scope Check
 
-If the spec covers multiple independent subsystems, it should have been broken into sub-project specs during brainstorming. If it wasn't, suggest breaking this into separate plans — one per subsystem. Each plan should produce working, testable software on its own.
+If the spec covers multiple independent subsystems, it should have been broken into sub-project specs during brainstorming. If it wasn't, suggest breaking this into separate plans — one per subsystem. Each plan should produce working software on its own.
+
+## Testing Strategy
+
+Tests are not the default. Work is usually verified by running the code, running the existing test suite, or a manual check.
+
+- Check what was agreed during brainstorming, or ask the user: do they want tests written at all?
+- New tests are written **only when the user opts in**. When they do, prefer **test-after** (write tests once the code works); use test-first (TDD) only if the user explicitly asks for it — and in that case follow the tdd skill.
+- Record the decision in the `**Testing:**` line of the plan header and shape each task's steps to match.
 
 ## File Structure
 
@@ -34,11 +42,11 @@ This structure informs the task decomposition. Each task should produce self-con
 ## Bite-Sized Task Granularity
 
 **Each step is one action (2-5 minutes):**
-- "Write the failing test" - step
-- "Run it to make sure it fails" - step
-- "Implement the minimal code to make the test pass" - step
-- "Run the tests and make sure they pass" - step
+- "Implement the change" - step
+- "Verify it works" - step (see Testing Strategy: run the command, existing tests, or a manual check)
 - "Commit" - step (omit if the user opts out of commits)
+
+**The only exception is opted-in TDD:** if the user explicitly requested test-first development, use the red-green shape instead — write the failing test, run it to confirm it fails, implement the minimal code, run it to confirm it passes, commit. Follow the tdd skill for this.
 
 ## Plan Document Header
 
@@ -55,6 +63,8 @@ This structure informs the task decomposition. Each task should produce self-con
 
 **Tech Stack:** [Key technologies/libraries]
 
+**Testing:** [How each task verifies its work. Default: run the code / existing test suite / manual check. Only list test-first steps if the user explicitly opted into TDD.]
+
 ---
 ```
 
@@ -66,39 +76,28 @@ This structure informs the task decomposition. Each task should produce self-con
 **Files:**
 - Create: `exact/path/to/file.py`
 - Modify: `exact/path/to/existing.py:123-145`
-- Test: `tests/exact/path/to/test.py`
+- Test: `tests/exact/path/to/test.py` — only when the plan's Testing line includes tests
 
-- [ ] **Step 1: Write the failing test**
-
-```python
-def test_specific_behavior():
-    result = function(input)
-    assert result == expected
-```
-
-- [ ] **Step 2: Run test to verify it fails**
-
-Run: `pytest tests/path/test.py::test_name -v`
-Expected: FAIL with "function not defined"
-
-- [ ] **Step 3: Write minimal implementation**
+- [ ] **Step 1: Implement [feature]**
 
 ```python
 def function(input):
     return expected
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [ ] **Step 2: Verify it works**
 
-Run: `pytest tests/path/test.py::test_name -v`
-Expected: PASS
+Run: [command that exercises the change, an existing test, or a manual check]
+Expected: [what you should observe]
 
-- [ ] **Step 5: Commit** (omit if the user opts out of commits)
+- [ ] **Step 3: Commit** (omit if the user opts out of commits)
 
 ```bash
-git add tests/path/test.py src/path/file.py
+git add src/path/file.py
 git commit -m "feat: add specific feature"
 ```
+
+> TDD variant — only when the plan's `**Testing:**` line says test-first: replace Step 1 with "Write the failing test", add a step running it to confirm it fails, then implement and run it to confirm it passes. Follow the tdd skill.
 ````
 
 ## No Placeholders
@@ -115,7 +114,7 @@ Every step must contain the actual content an engineer needs. These are **plan f
 - Exact file paths always
 - Complete code in every step — if a step changes code, show the code
 - Exact commands with expected output
-- DRY, YAGNI, TDD, frequent commits unless the user opts out
+- DRY, YAGNI, frequent commits unless the user opts out
 
 ## Self-Review
 
