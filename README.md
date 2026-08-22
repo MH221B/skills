@@ -54,6 +54,7 @@ Each skill lives in its own folder with a `SKILL.md` file. OpenCode loads the fo
 
 - **Matt Pocock**: core skills framework and methodology
 - **obra**: the Superpowers set, adapted for this workflow
+- **Dietrich Gebert**: the ponytail family (lazy-code mode, review, audit, debt), MIT licensed. Source: https://github.com/DietrichGebert/ponytail
 
 ## Usage
 
