@@ -17,8 +17,7 @@ These skills are designed to be used with an AI coding assistant to enhance prod
 ### Development & Testing
 - **tdd** — Red-green-refactor test-driven development
 - **prototype** — Build throwaway prototypes to explore designs
-- **systematic-debugging** — Disciplined diagnosis loop for hard bugs
-- **diagnose** — Debug issues through reproduction, minimization, and instrumentation
+- **diagnosing-bugs** — Disciplined feedback-loop diagnosis for hard bugs and performance regressions
 
 ### Code & Architecture
 - **improve-codebase-architecture** — Find refactoring opportunities and deepening paths
