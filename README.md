@@ -2,11 +2,11 @@
 
 Skills for working with a coding assistant: planning, building, debugging, and reviewing without the usual ceremony.
 
-Most come from Matt Pocock's skill set, some from obra's Superpowers. The collection is trimmed for a solo workflow: TDD is opt-in rather than the default, the issue-tracker pipeline (to-issues, to-prd, triage) is gone, and everything is adapted to run in OpenCode.
+Most come from Matt Pocock's skill set, some from obra's Superpowers. The collection is trimmed for a solo workflow: TDD is opt-in rather than the default, and the issue-tracker pipeline (to-issues, to-prd, triage) is gone. The skills follow the Agent Skills format, so any host that loads skills can run them: opencode, Claude Code, Codex, and others.
 
 ## Skills
 
-Each skill lives in its own folder with a `SKILL.md` file. OpenCode loads the folder as the global skill source; an individual skill loads when its description matches what you're doing, and you can also invoke one by name.
+Each skill lives in its own folder with a `SKILL.md` file. Here the folder is registered as opencode's global skill source, but the layout is the standard Agent Skills one, so the same folders work anywhere. An individual skill loads when its description matches what you're doing, and you can also invoke one by name.
 
 ### Planning and design
 - **brainstorming**: Explore requirements and design before implementing
