@@ -32,9 +32,6 @@ These skills are designed to be used with an AI coding assistant to enhance prod
 - **ponytail-help** — Quick reference for the ponytail commands and levels.
 
 ### Project Management
-- **to-issues** — Break plans into independently-grabbable issues
-- **to-prd** — Convert context into a PRD
-- **triage** — Manage issues through a triage workflow
 - **handoff** — Prepare work for handoff to another agent
 
 ### Utilities
