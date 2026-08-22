@@ -107,20 +107,21 @@ Adapted from the Socratic 5-phase tutoring method. The unit of dialogue mode is 
 
 1. **Read state silently**: `MISSION.md`, `GLOSSARY.md`, the relevant `dialogue-logs/<topic>.md` (full history, append-only), `learning-records/`, `tutoring-state/knowledge-graph.md`. Do not present this context to the user.
 2. **Topic resolution**: match the user's request to an existing `dialogue-logs/<topic>.md`, or create a new one. If the user is returning to a topic, follow the Returning-Session Protocol: orient silently, skip already-captured dimensions, re-probe shift-prone ones (confidence, new constraints, whether old misconceptions resolved).
-3. **5-Phase Tutoring** (per session, one session per request unless the user wants more):
+3. **Mode detection** (before the phases): detect whether the topic is **Coding** (code, languages, APIs, architecture, algorithms, frameworks) or **General** (math, history, science, writing, philosophy). If ambiguous, ask briefly to confirm. Coding topics add the Phase 1 additions and Phase 3/4 specifics below; General topics use the flexible Phase 3 scaffolding.
+4. **5-Phase Tutoring** (per session, one session per request unless the user wants more):
 
-   - **Phase 1: Assessment** — probe 5 dimensions: conceptual understanding, problem-solving approach, tool fluency (if coding), confidence level, learning context. Skip dimensions already well-captured in the log.
+   - **Phase 1: Assessment** — probe 5 dimensions: conceptual understanding, problem-solving approach, tool fluency (if coding), confidence level, learning context. Skip dimensions already well-captured in the log. In Coding mode, also establish: language/environment, frameworks/constraints/existing code, and the success criterion.
    - **Phase 2: Blueprinting ("Explain It Back")** — student articulates the problem in plain language. Listen for logic flaws, gaps, misconceptions. Ask questions that expose issues.
-   - **Phase 3: Progressive Execution** — 20% scaffold (boilerplate, method signatures, TODOs), 80% discovery. Give only Step 1, wait, then Step 2. Use 5 Socratic question types: Clarifying → Probing → Connecting → Counter → Hypothetical.
-   - **Phase 4: Socratic Debugging** — when student is wrong, ask guiding questions. **Never write the fix.** If the student is on the right track, deepen with harder questions.
+   - **Phase 3: Progressive Execution** — 20% scaffold (boilerplate, method signatures, TODOs), 80% discovery. Give only Step 1, wait, then Step 2. Use the 5 Socratic question types — Clarifying → Probing → Connecting → Counter → Hypothetical (see `references/question-types.md` for each, with worked dialogue). In Coding mode, scaffold as TODOs, never implementations; in General mode, scaffold via Concept Mapping, Timeline/Narrative, or Problem Decomposition (see mode specifics below).
+   - **Phase 4: Socratic Debugging** — when student is wrong, ask guiding questions. **Never write the fix.** If the student is on the right track, deepen with harder questions. In Coding mode, follow the debugging guide below.
    - **Phase 5: Metacognitive Closure** — student summarizes what they learned and why. Connect to future learning. Offer next steps **only if the student asks**.
 
-4. **Append session entry** to `dialogue-logs/<topic>.md`:
+5. **Append session entry** to `dialogue-logs/<topic>.md`:
    - Date + session number
    - Phases 1–5 summaries
    - Any new mental models, misconceptions, or glossary terms
    - Quiz results (if any)
-5. **Learning record** (only on demonstrated learning): write to `learning-records/<NNNN>-<slug>.md` per the format spec.
+6. **Learning record** (only on demonstrated learning): write to `learning-records/<NNNN>-<slug>.md` per the format spec.
 
 **Forbidden in dialogue mode:**
 
@@ -131,6 +132,33 @@ Adapted from the Socratic 5-phase tutoring method. The unit of dialogue mode is 
 - Surfacing the knowledge graph or suggesting next topics unprompted.
 
 **Anti-frustration protocol** (when student is stuck): acknowledge → re-anchor goal → lower friction (smaller steps, analogies) → never surrender the final logical connection to the student.
+
+### Mode specifics
+
+*Coding — Phase 3 scaffolding* (provide structure with TODOs, not implementation):
+
+```python
+def solve_problem(input_data):
+    # TODO: Phase 1 - Parse & validate inputs
+    # TODO: Phase 2 - Core logic here
+    # TODO: Phase 3 - Format & return output
+```
+
+Then: *"Start with Phase 1 — what does input parsing look like?"* Let them fill in the TODOs.
+
+*Coding — Phase 4 debugging guide:* when they hit a bug, walk through: (1) describe what's happening vs. expected, (2) where's the mismatch?, (3) add a log statement and observe, (4) which line is the issue? **Never write the fix** — guide them to it.
+
+*General — Phase 3 scaffolding:* adapt with flexible techniques — Concept Mapping (*"Let's visualize the relationships between X, Y, Z"*), Timeline/Narrative (*"Walk me through the sequence of events. Why did Y follow X?"*), Problem Decomposition (*"This has 3 parts. Tackle part 1 first."*). Phases 1, 2, 4, 5 remain the same.
+
+### Dialogue-mode reference docs
+
+For the deeper pedagogy, read the sibling files as needed:
+
+- `references/question-types.md` — the five Socratic question types with real dialogue samples (coding + general)
+- `references/phase-examples.md` — full worked examples of all five phases
+- `references/quiz-mode-guide.md` — the complete quiz workflow (activate, baseline, adaptive difficulty, feedback)
+
+The quiz guide refers to `tutoring-state/` topic files; in `educator` those map to `dialogue-logs/<topic>.md` + `learning-records/`.
 
 ## Quiz formats
 
