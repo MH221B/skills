@@ -24,6 +24,14 @@ These skills are designed to be used with an AI coding assistant to enhance prod
 - **improve-codebase-architecture** — Find refactoring opportunities and deepening paths
 - **write-a-skill** — Create new agent skills with proper structure
 
+### Minimalism and code review
+- **ponytail** — Make the agent write the smallest thing that works. It questions whether code needs to exist, reaches for the standard library before a custom abstraction, and cuts needless structure. Levels: lite, full (default), ultra.
+- **ponytail-review** — Review a diff for over-engineering and list what to delete.
+- **ponytail-audit** — Same as review, but across the whole repo instead of just the diff.
+- **ponytail-debt** — Gather the `ponytail:` shortcuts you deferred into one ledger so they don't rot.
+- **ponytail-gain** — Show ponytail's measured impact: less code, less cost, more speed.
+- **ponytail-help** — Quick reference for the ponytail commands and levels.
+
 ### Project Management
 - **to-issues** — Break plans into independently-grabbable issues
 - **to-prd** — Convert context into a PRD
@@ -35,6 +43,7 @@ These skills are designed to be used with an AI coding assistant to enhance prod
 - **caveman** — Ultra-compressed communication mode (~75% fewer tokens)
 - **socratic-master-tutor** — Socratic learning for deep understanding
 - **setup-matt-pocock-skills** — Configure issue tracker integration
+- **unslop** — Strip AI tells from any writing and put a human voice back in. No fluff, no filler, no corporate vocabulary.
 
 ## Attribution
 
