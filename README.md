@@ -47,7 +47,6 @@ These skills are designed to be used with an AI coding assistant to enhance prod
 - **find-skills** — Discover and install available skills
 - **caveman** — Ultra-compressed communication mode (~75% fewer tokens)
 - **wait-what** — Stop and re-pitch when the last message didn't land
-- **socratic-master-tutor** — Socratic learning for deep understanding
 - **setup-matt-pocock-skills** — Set up the domain-docs convention (CONTEXT.md / ADRs) for the engineering skills
 - **unslop** — Strip AI tells from any writing and put a human voice back in. No fluff, no filler, no corporate vocabulary.
 

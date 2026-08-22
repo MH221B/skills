@@ -101,7 +101,7 @@ Lessons are built from reusable components in `assets/`: stylesheets, quiz widge
 
 ## Dialogue Mode procedure
 
-Adapted from `socratic-master-tutor`. The unit of dialogue mode is one append-only session entry in `dialogue-logs/<topic>.md`.
+Adapted from the Socratic 5-phase tutoring method. The unit of dialogue mode is one append-only session entry in `dialogue-logs/<topic>.md`.
 
 **Per request:**
 
