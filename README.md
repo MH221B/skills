@@ -15,7 +15,6 @@ These skills are designed to be used with an AI coding assistant to enhance prod
 - **grill-me** — Stress-test ideas through intensive questioning
 - **grill-with-docs** — Grill against existing domain knowledge, creating ADRs and glossary as you go
 - **implement** — Implement a piece of work based on a spec or set of tickets (uses `/tdd` where pre-agreed, then `/code-review`)
-- **wayfinder** — Plan huge work as a map of decision tickets on the issue tracker, resolved one at a time
 
 ### Development & Debugging
 - **tdd** — Red-green-refactor test-driven development
