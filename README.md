@@ -37,8 +37,6 @@ These skills are designed to be used with an AI coding assistant to enhance prod
 - **ponytail-review** — Review a diff for over-engineering and list what to delete.
 - **ponytail-audit** — Same as review, but across the whole repo instead of just the diff.
 - **ponytail-debt** — Gather the `ponytail:` shortcuts you deferred into one ledger so they don't rot.
-- **ponytail-gain** — Show ponytail's measured impact: less code, less cost, more speed.
-- **ponytail-help** — Quick reference for the ponytail commands and levels.
 
 ### Handoff
 - **handoff** — Compact the current conversation into a handoff document for another agent to pick up
