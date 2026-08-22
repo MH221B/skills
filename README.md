@@ -10,17 +10,27 @@ These skills are designed to be used with an AI coding assistant to enhance prod
 
 ### Planning & Design
 - **brainstorming** — Explore requirements and design before implementation
-- **writing-plans** — Create structured plans for multi-step tasks
+- **writing-plans** — Create structured implementation plans for multi-step tasks
+- **grilling** — Grill the user relentlessly about a plan, decision, or idea
 - **grill-me** — Stress-test ideas through intensive questioning
-- **grill-with-docs** — Validate plans against existing domain knowledge and ADRs
+- **grill-with-docs** — Grill against existing domain knowledge, creating ADRs and glossary as you go
+- **implement** — Implement a piece of work based on a spec or set of tickets (uses `/tdd` where pre-agreed, then `/code-review`)
+- **wayfinder** — Plan huge work as a map of decision tickets on the issue tracker, resolved one at a time
 
-### Development & Testing
+### Development & Debugging
 - **tdd** — Red-green-refactor test-driven development
-- **prototype** — Build throwaway prototypes to explore designs
 - **diagnosing-bugs** — Disciplined feedback-loop diagnosis for hard bugs and performance regressions
+- **prototype** — Build throwaway prototypes to explore designs
+- **resolving-merge-conflicts** — Resolve an in-progress git merge/rebase conflict
+
+### Research
+- **research** — Investigate a question against high-trust primary sources and capture findings as a Markdown file
 
 ### Code & Architecture
+- **codebase-design** — Shared vocabulary for designing deep modules
 - **improve-codebase-architecture** — Find refactoring opportunities and deepening paths
+- **domain-modeling** — Build and sharpen the project's domain model (CONTEXT.md / ADRs)
+- **code-review** — Review changes since a fixed point along Standards and design axes
 - **write-a-skill** — Create new agent skills with proper structure
 
 ### Minimalism and code review
@@ -31,14 +41,15 @@ These skills are designed to be used with an AI coding assistant to enhance prod
 - **ponytail-gain** — Show ponytail's measured impact: less code, less cost, more speed.
 - **ponytail-help** — Quick reference for the ponytail commands and levels.
 
-### Project Management
-- **handoff** — Prepare work for handoff to another agent
+### Handoff
+- **handoff** — Compact the current conversation into a handoff document for another agent to pick up
 
 ### Utilities
 - **find-skills** — Discover and install available skills
 - **caveman** — Ultra-compressed communication mode (~75% fewer tokens)
+- **wait-what** — Stop and re-pitch when the last message didn't land
 - **socratic-master-tutor** — Socratic learning for deep understanding
-- **setup-matt-pocock-skills** — Configure issue tracker integration
+- **setup-matt-pocock-skills** — Set up the domain-docs convention (CONTEXT.md / ADRs) for the engineering skills
 - **unslop** — Strip AI tells from any writing and put a human voice back in. No fluff, no filler, no corporate vocabulary.
 
 ## Attribution
