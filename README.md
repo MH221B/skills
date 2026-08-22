@@ -50,6 +50,19 @@ Each skill lives in its own folder with a `SKILL.md` file. Here the folder is re
 - **setup-matt-pocock-skills**: Set up the domain-docs convention (CONTEXT.md / ADRs) for the engineering skills
 - **unslop**: Strip AI tells from writing and put a human voice back in
 
+## Workflow
+
+One unit of work, top to bottom:
+
+1. **grill** the idea with the user. Interview until the design tree is settled and every branch is visited. Use `grill-with-docs` when decisions should also land in `CONTEXT.md` and the ADRs.
+2. **brainstorm** the settled idea into a written spec. Subagents gather project context in parallel while you ask questions, propose approaches, present the design, and save the spec.
+3. **ponytail-review** the spec. Cut features nobody asked for before they cost anything.
+4. **prototype** the risky part of the design: a state model to push around or a few UI variants to look at. Cheap and throwaway, just to feel it before committing. Fold the verdict back into the spec.
+5. **writing-plans** turns the spec into an implementation plan: files, code, verification, commits.
+6. **implement** works the plan. It reads the spec, plan, and any prototype that exists, uses `/tdd` where pre-agreed, then runs `/code-review` when done.
+
+In between and around it: `ponytail-review` again on the implementation diff, `diagnosing-bugs` when something breaks, and `handoff` to `pickup` to `sweep` when the work spans sessions.
+
 ## Attribution
 
 - **Matt Pocock**: core skills framework and methodology
