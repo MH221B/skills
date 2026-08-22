@@ -41,6 +41,7 @@ These skills are designed to be used with an AI coding assistant to enhance prod
 ### Handoff
 - **handoff** — Compact the current conversation into a handoff document for another agent to pick up
 - **pickup** — Resume work in a new session from the newest handoff document
+- **sweep** — Clean skill artifacts out of the OS temp dirs after multiple sessions
 
 ### Utilities
 - **find-skills** — Discover and install available skills
