@@ -5,7 +5,7 @@ argument-hint: "What will the next session be used for?"
 disable-model-invocation: true
 ---
 
-Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save to the temporary directory of the user's OS - not the current workspace.
+Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save to the temporary directory of the user's OS, not the current workspace. Name it `handoff-YYYY-MM-DD_HHMM_<topic-slug>.md` (e.g. `handoff-2026-08-22_1530_api-refactor.md`) so a pickup session can find the newest one.
 
 Include a "suggested skills" section in the document, naming which skills the next agent should call the Skill tool for.
 
