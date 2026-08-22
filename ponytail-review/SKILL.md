@@ -1,18 +1,18 @@
 ---
 name: ponytail-review
 description: >
-  Code review focused exclusively on over-engineering. Finds what to delete:
-  reinvented standard library, unneeded dependencies, speculative abstractions,
-  dead flexibility. One line per finding: location, what to cut, what replaces
-  it. Use when the user says "review for over-engineering", "what can we
-  delete", "is this over-engineered", "simplify review", or invokes
-  /ponytail-review. Complements correctness-focused review, this one only
-  hunts complexity.
+  Review for over-engineering, in a diff or in a spec/plan document. Finds
+  what to delete: reinvented standard library, unneeded dependencies,
+  speculative abstractions, dead flexibility, features nobody asked for. One
+  line per finding: location, what to cut, what replaces it. Use when the user
+  says "review for over-engineering", "what can we delete", "is this
+  over-engineered", "simplify review", "review this plan", "audit this spec",
+  or invokes /ponytail-review. Complements correctness-focused review, this
+  one only hunts complexity.
 source: https://github.com/DietrichGebert/ponytail
 ---
 
-Review diffs for unnecessary complexity. One line per finding: location, what
-to cut, what replaces it. The diff's best outcome is getting shorter.
+Review a diff or a spec/plan document for unnecessary complexity. One line per finding: location, what to cut, what replaces it. The best outcome is the thing getting shorter.
 
 ## Format
 
@@ -26,6 +26,17 @@ Tags:
 - `native:` dependency or code doing what the platform already does. Name the feature.
 - `yagni:` abstraction with one implementation, config nobody sets, layer with one caller.
 - `shrink:` same logic, fewer lines. Show the shorter form.
+
+## Documents
+
+The same lens works on a spec (`docs/superpowers/specs/...`) or a plan (`docs/superpowers/plans/...`) before it becomes code. The tags map over:
+
+- `yagni:` a feature or section nobody asked for, a "future extensibility" tombstone
+- `delete:` expected-soon stubs, "later" sections, placeholders planning to scaffold
+- `shrink:` a task that touches five files where one suffices, a section twice as long as its idea
+- `stdlib:` and `native:` don't apply to prose. Use "an existing codebase pattern already covers this" instead.
+
+Document findings use the same one-line format, citing the section or line instead of a line-range.
 
 ## Examples
 
