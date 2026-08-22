@@ -31,6 +31,7 @@ All state files and subdirectories live at the workspace root or in its immediat
 | `GLOSSARY.md` | Canonical terminology, shared by both modes. Terms added only when user demonstrates understanding. |
 | `lessons/<NNNN>-<dash-case>.html` | Tufte-style HTML lesson, the unit of lesson mode. |
 | `reference/*.html` | Compressed cheat sheets, syntax, flowcharts. Designed for re-reading. |
+| `assets/` | Reusable components shared across lessons: stylesheets, quiz widgets, simulators, diagram helpers. Reuse is the default. |
 | `dialogue-logs/<topic-slug>.md` | Append-only Socratic dialogue log per topic. |
 | `learning-records/<NNNN>-<slug>.md` | Sparse, decision-grade records of demonstrated learning. |
 | `NOTES.md` | User preferences + agent working notes. |
@@ -86,6 +87,10 @@ Adapted from `teach`. The unit of lesson mode is one self-contained HTML lesson 
 6. **Skill practice** (optional, in-lesson): tight-feedback interactive steps after each checkpoint.
 7. **Reference docs** (when a topic benefits from a cheat sheet): write to `reference/<slug>.html`.
 8. **Learning record** (only on demonstrated learning): write to `learning-records/<NNNN>-<slug>.md` per the format spec.
+
+**Assets (shared components):**
+
+Lessons are built from reusable components in `assets/`: stylesheets, quiz widgets, simulators, diagram helpers, and anything else a second lesson could reuse. Reuse is the default, not the exception — before authoring a lesson, read `assets/` and build from the components already there. When a lesson needs something new and reusable, write it as a component in `assets/` and link to it; never inline code a future lesson would duplicate. A shared stylesheet is the first component every workspace earns: every lesson links it, so the lessons read as one consistent course rather than a pile of one-offs. As the workspace grows, so should the component library.
 
 **Forbidden in lesson mode:**
 
