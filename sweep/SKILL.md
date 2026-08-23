@@ -1,6 +1,12 @@
 ---
 name: sweep
-description: Clean agent-session artifacts out of the OS temp dirs after multiple sessions: handoff docs, throwaway scripts and harnesses, prototype builds, debug HTML reports, captured traces, log dumps. Lists what it found, flags items older than a day as deletable, and removes only what you confirm. Use when temp dirs accumulate junk, or with "sweep", "clean temp", "clear out /tmp". Other temp files are never touched.
+description: >
+  Clean agent-session artifacts out of the OS temp dirs after multiple
+  sessions: handoff docs, throwaway scripts and harnesses, prototype builds,
+  debug HTML reports, captured traces, log dumps. Lists what it found, flags
+  items older than a day as deletable, and removes only what you confirm. Use
+  when temp dirs accumulate junk, or with "sweep", "clean temp", "clear out
+  /tmp". Other temp files are never touched.
 argument-hint: "[dry-run | all]"
 disable-model-invocation: true
 ---
