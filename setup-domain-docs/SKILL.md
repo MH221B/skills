@@ -1,10 +1,10 @@
 ---
-name: setup-matt-pocock-skills
+name: setup-domain-docs
 description: Sets up the domain-docs convention (CONTEXT.md / docs/adr/ layout and consumer rules) so skills like improve-codebase-architecture, diagnosing-bugs, and tdd know how to read the repo's domain language and architectural decisions. Writes an `## Agent skills` block in AGENTS.md/CLAUDE.md and `docs/agents/domain.md`. Run before first use of those skills, or if they appear to be missing context about domain docs.
 disable-model-invocation: true
 ---
 
-# Setup Matt Pocock's Skills
+# Setup Domain Docs
 
 Scaffold the per-repo domain-docs configuration that the engineering skills assume. The skills `improve-codebase-architecture`, `diagnosing-bugs`, and `tdd` read `CONTEXT.md` for the project's domain language and `docs/adr/` for past architectural decisions.
 

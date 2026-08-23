@@ -10,7 +10,7 @@ Two-axis review of the diff between `HEAD` and a fixed point the user supplies:
 
 Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings.
 
-The issue tracker should have been provided to you. If `docs/agents/issue-tracker.md` is missing, tell the user to run `/setup-matt-pocock-skills`.
+The originating spec usually comes from the brainstorming (`docs/superpowers/specs/`) and writing-plans (`docs/superpowers/plans/`) skills. See step 2.
 
 ## Process
 
@@ -26,10 +26,11 @@ Before going further, confirm the fixed point resolves (`git rev-parse <fixed-po
 
 Look for the originating spec, in this order:
 
-1. Issue references in the commit messages (`#123`, `Closes #45`, GitLab `!67`, etc.), fetched via the workflow in `docs/agents/issue-tracker.md`.
-2. A path the user passed as an argument.
-3. A spec file under `docs/`, `specs/`, or `.scratch/` matching the branch name or feature.
-4. If nothing is found, ask the user where the spec is. If they say there isn't one, the **Spec** sub-agent will skip and report "no spec available".
+1. The spec or plan produced by the brainstorming and writing-plans skills: `docs/superpowers/specs/` or `docs/superpowers/plans/`.
+2. Issue references in the commit messages (`#123`, `Closes #45`, GitLab `!67`, etc.), if the repo actually tracks issues.
+3. A path the user passed as an argument.
+4. A spec file under `docs/`, `specs/`, or `.scratch/` matching the branch name or feature.
+5. If nothing is found, ask the user where the spec is. If they say there isn't one, the **Spec** sub-agent will skip and report "no spec available".
 
 ### 3. Identify the standards sources
 

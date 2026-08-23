@@ -47,7 +47,7 @@ Each skill lives in its own folder with a `SKILL.md` file. Here the folder is re
 - **find-skills**: Discover and install available skills
 - **caveman**: Ultra-compressed communication mode (roughly 75% fewer tokens)
 - **wait-what**: Stop and re-pitch when the last message didn't land
-- **setup-matt-pocock-skills**: Set up the domain-docs convention (CONTEXT.md / ADRs) for the engineering skills
+- **setup-domain-docs**: Set up the domain-docs convention (CONTEXT.md / ADRs) for the engineering skills
 - **unslop**: Strip AI tells from writing and put a human voice back in
 
 ## Workflow
