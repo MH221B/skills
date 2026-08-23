@@ -15,18 +15,18 @@ A `MISSION.md` file declares the user's reason for learning. One mission per wor
 ```markdown
 # Mission
 
-**Why I'm learning:** <one sentence — the concrete goal>
+**Why I'm learning:** <one sentence: the concrete goal>
 
 **Success looks like:** <observable outcome, dated if possible>
 
-**Constraints:** <time, prior knowledge, tools, budget — anything that shapes what to teach>
+**Constraints:** <time, prior knowledge, tools, budget: anything that shapes what to teach>
 
 **Out of scope:** <topics the agent should not waste time on>
 ```
 
 ## Anti-patterns
 
-- Vague missions ("learn X", "understand Y better") — push back.
-- Missions that try to cover unrelated topics — split into separate workspaces.
+- Vague missions ("learn X", "understand Y better"): push back.
+- Missions that try to cover unrelated topics: split into separate workspaces.
 - Missions without an observable success criterion.
-- Missions that grow past a screen — split or trim.
+- Missions that grow past a screen: split or trim.

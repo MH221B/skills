@@ -18,14 +18,14 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 ## Scope Check
 
-If the spec covers multiple independent subsystems, it should have been broken into sub-project specs during brainstorming. If it wasn't, suggest breaking this into separate plans — one per subsystem. Each plan should produce working software on its own.
+If the spec covers multiple independent subsystems, it should have been broken into sub-project specs during brainstorming. If it wasn't, suggest breaking this into separate plans: one per subsystem. Each plan should produce working software on its own.
 
 ## Testing Strategy
 
 Tests are not the default. Work is usually verified by running the code, running the existing test suite, or a manual check.
 
 - Check what was agreed during brainstorming, or ask the user: do they want tests written at all?
-- New tests are written **only when the user opts in**. When they do, prefer **test-after** (write tests once the code works); use test-first (TDD) only if the user explicitly asks for it — and in that case follow the tdd skill.
+- New tests are written **only when the user opts in**. When they do, prefer **test-after** (write tests once the code works); use test-first (TDD) only if the user explicitly asks for it: and in that case follow the tdd skill.
 - Record the decision in the `**Testing:**` line of the plan header and shape each task's steps to match.
 
 ## File Structure
@@ -46,7 +46,7 @@ This structure informs the task decomposition. Each task should produce self-con
 - "Verify it works" - step (see Testing Strategy: run the command, existing tests, or a manual check)
 - "Commit" - step (omit if the user opts out of commits)
 
-**The only exception is opted-in TDD:** if the user explicitly requested test-first development, use the red-green shape instead — write the failing test, run it to confirm it fails, implement the minimal code, run it to confirm it passes, commit. Follow the tdd skill for this.
+**The only exception is opted-in TDD:** if the user explicitly requested test-first development, use the red-green shape instead: write the failing test, run it to confirm it fails, implement the minimal code, run it to confirm it passes, commit. Follow the tdd skill for this.
 
 ## Plan Document Header
 
@@ -76,7 +76,7 @@ This structure informs the task decomposition. Each task should produce self-con
 **Files:**
 - Create: `exact/path/to/file.py`
 - Modify: `exact/path/to/existing.py:123-145`
-- Test: `tests/exact/path/to/test.py` — only when the plan's Testing line includes tests
+- Test: `tests/exact/path/to/test.py`: only when the plan's Testing line includes tests
 
 - [ ] **Step 1: Implement [feature]**
 
@@ -97,36 +97,36 @@ git add src/path/file.py
 git commit -m "feat: add specific feature"
 ```
 
-> TDD variant — only when the plan's `**Testing:**` line says test-first: replace Step 1 with "Write the failing test", add a step running it to confirm it fails, then implement and run it to confirm it passes. Follow the tdd skill.
+> TDD variant: only when the plan's `**Testing:**` line says test-first: replace Step 1 with "Write the failing test", add a step running it to confirm it fails, then implement and run it to confirm it passes. Follow the tdd skill.
 ````
 
 ## No Placeholders
 
-Every step must contain the actual content an engineer needs. These are **plan failures** — never write them:
+Every step must contain the actual content an engineer needs. These are **plan failures**: never write them:
 - "TBD", "TODO", "implement later", "fill in details"
 - "Add appropriate error handling" / "add validation" / "handle edge cases"
 - "Write tests for the above" (without actual test code)
-- "Similar to Task N" (repeat the code — the engineer may be reading tasks out of order)
+- "Similar to Task N" (repeat the code: the engineer may be reading tasks out of order)
 - Steps that describe what to do without showing how (code blocks required for code steps)
 - References to types, functions, or methods not defined in any task
 
 ## Remember
 - Exact file paths always
-- Complete code in every step — if a step changes code, show the code
+- Complete code in every step: if a step changes code, show the code
 - Exact commands with expected output
 - DRY, YAGNI, frequent commits unless the user opts out
 
 ## Self-Review
 
-After writing the complete plan, look at the spec with fresh eyes and check the plan against it. This is a checklist you run yourself — not a subagent dispatch.
+After writing the complete plan, look at the spec with fresh eyes and check the plan against it. This is a checklist you run yourself: not a subagent dispatch.
 
 **1. Spec coverage:** Skim each section/requirement in the spec. Can you point to a task that implements it? List any gaps.
 
-**2. Placeholder scan:** Search your plan for red flags — any of the patterns from the "No Placeholders" section above. Fix them.
+**2. Placeholder scan:** Search your plan for red flags: any of the patterns from the "No Placeholders" section above. Fix them.
 
 **3. Type consistency:** Do the types, method signatures, and property names you used in later tasks match what you defined in earlier tasks? A function called `clearLayers()` in Task 3 but `clearFullLayers()` in Task 7 is a bug.
 
-If you find issues, fix them inline. No need to re-review — just fix and move on. If you find a spec requirement with no task, add the task.
+If you find issues, fix them inline. No need to re-review: just fix and move on. If you find a spec requirement with no task, add the task.
 
 ## Plan Document Handling
 
@@ -136,7 +136,7 @@ Do NOT commit plan documents. Plans are authored for review and execution, but s
 
 After saving the plan, ask the user to verify it before proceeding:
 
-**"Plan complete and saved to `docs/superpowers/plans/<filename>.md` (not committed). Please review the plan. Let me know if you want to make any changes, or if you'd like me to start executing it task-by-task."**
+**"Plan complete and saved to `docs/superpowers/plans/<filename>.md` (not committed). Please review the plan, then tell me any changes, or say 'start executing'."**
 
 - Wait for user approval before starting execution.
 - Once approved, execute tasks in this session sequentially.

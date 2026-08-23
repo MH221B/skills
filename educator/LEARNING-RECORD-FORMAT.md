@@ -18,9 +18,9 @@ Learning records are the ADR (Architecture Decision Record) of teaching: short, 
 title: <short, specific title>
 status: active | superseded by LR-NNNN
 date: <YYYY-MM-DD>
-evidence: <optional — what demonstrates this learning, e.g. "user explained X correctly in their own words">
-implications: <optional — what this means for future teaching>
-related: <optional — list of related learning record numbers, e.g. [0001, 0003]>
+evidence: <optional: what demonstrates this learning, e.g. "user explained X correctly in their own words">
+implications: <optional: what this means for future teaching>
+related: <optional: list of related learning record numbers, e.g. [0001, 0003]>
 ---
 ```
 

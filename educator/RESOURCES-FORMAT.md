@@ -20,14 +20,14 @@
 
 ### <topic-area>
 
-- **<title>** — <author or publisher>. <URL>. <one-line: what it covers> + <when to reach for it>.
-- **<title>** — ...
+- **<title>**: <author or publisher>. <URL>. <one-line: what it covers> + <when to reach for it>.
+- **<title>**: ...
 
 ## Wisdom
 
 ### <topic-area>
 
-- **<title>** — <author or publisher>. <URL>. <one-line: what it covers> + <when to reach for it>.
+- **<title>**: <author or publisher>. <URL>. <one-line: what it covers> + <when to reach for it>.
 
 ## Gaps
 
@@ -35,7 +35,7 @@
 
 ## Opt-outs
 
-- <community, author, or domain> — <reason the user opted out>
+- <community, author, or domain>: <reason the user opted out>
 ```
 
 ## Anti-patterns

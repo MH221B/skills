@@ -2,7 +2,7 @@
 name: educator
 description: Teach the user a new topic via either lesson mode (Tufte-style HTML lessons with multiple-choice quizzes) or dialogue mode (Socratic 5-phase free-response tutoring). Use when the user wants to learn, study, drill, or be quizzed on a topic over multiple sessions.
 disable-model-invocation: false
-argument-hint: "What would you like to learn, and how — by lesson or by dialogue?"
+argument-hint: "What would you like to learn, and how: by lesson or dialogue?"
 ---
 
 # Educator
@@ -13,8 +13,8 @@ A hybrid tutor. Two modes, one workspace, shared state. Pick a mode per request.
 
 Use when the user wants to learn, study, drill, or be quizzed on a topic over multiple sessions. Two modes:
 
-- **Lesson mode** — produce a polished Tufte-style HTML lesson with multiple-choice checkpoints, drawn from curated resources in `RESOURCES.md`. Direct answers allowed.
-- **Dialogue mode** — run a Socratic 5-phase tutoring session: Assessment → Blueprinting → Progressive Execution → Socratic Debugging → Metacognitive Closure. Direct answers forbidden.
+- **Lesson mode**: produce a polished Tufte-style HTML lesson with multiple-choice checkpoints, drawn from curated resources in `RESOURCES.md`. Direct answers allowed.
+- **Dialogue mode**: run a Socratic 5-phase tutoring session: Assessment → Blueprinting → Progressive Execution → Socratic Debugging → Metacognitive Closure. Direct answers forbidden.
 
 Domain-agnostic. The user picks the mode per request; default to dialogue mode when ambiguous.
 
@@ -44,7 +44,7 @@ All state files and subdirectories live at the workspace root or in its immediat
 Follow this rule on every request:
 
 1. **Explicit user mode signal wins.** "Lesson", "write me a guide", "explain", "teach me by showing" → Lesson Mode. "Quiz me", "test me", "help me figure out", "let's discuss", "Socratic" → Dialogue Mode.
-2. **If ambiguous, ask once.** A single short question with two options. Don't burn a turn — pick a sensible default and let the user correct.
+2. **If ambiguous, ask once.** A single short question with two options. Don't burn a turn: pick a sensible default and let the user correct.
 3. **Default to Dialogue Mode** when truly ambiguous. Socratic mode generalizes; the other direction does not.
 4. **Record the mode per request** in the lesson HTML frontmatter (`<!-- mode: lesson -->`) or dialogue log session header (`## Session YYYY-MM-DD mode: dialogue`). The knowledge graph derives per-topic dominant mode from these markers.
 
@@ -70,9 +70,9 @@ Adapted from `teach`. The unit of lesson mode is one self-contained HTML lesson 
 **Per request:**
 
 1. **Read state silently**: `MISSION.md`, `RESOURCES.md`, `GLOSSARY.md`, recent `learning-records/`, `tutoring-state/knowledge-graph.md`.
-2. **ZPD computation**: pick the most relevant next topic — read mission + learning records + knowledge graph. Either let the user specify, or pick something in the user's ZPD and announce it.
+2. **ZPD computation**: pick the most relevant next topic: read mission + learning records + knowledge graph. Either let the user specify, or pick something in the user's ZPD and announce it.
 3. **Resource check**: confirm `RESOURCES.md` has at least one relevant, high-trust source. If not, mark a gap and ask the user for a source or pause to research.
-4. **Lesson design** — produce one HTML file in `lessons/<NNNN>-<dash-case>.html`:
+4. **Lesson design**: produce one HTML file in `lessons/<NNNN>-<dash-case>.html`:
    - Sequentially numbered (`0001-`, `0002-`, …).
    - Tufte-style aesthetic, print-ready, fast to complete.
    - One tangible win per lesson.
@@ -90,7 +90,7 @@ Adapted from `teach`. The unit of lesson mode is one self-contained HTML lesson 
 
 **Assets (shared components):**
 
-Lessons are built from reusable components in `assets/`: stylesheets, quiz widgets, simulators, diagram helpers, and anything else a second lesson could reuse. Reuse is the default, not the exception — before authoring a lesson, read `assets/` and build from the components already there. When a lesson needs something new and reusable, write it as a component in `assets/` and link to it; never inline code a future lesson would duplicate. A shared stylesheet is the first component every workspace earns: every lesson links it, so the lessons read as one consistent course rather than a pile of one-offs. As the workspace grows, so should the component library.
+Lessons are built from reusable components in `assets/`: stylesheets, quiz widgets, simulators, diagram helpers, and anything else a second lesson could reuse. Reuse is the default, not the exception: before authoring a lesson, read `assets/` and build from the components already there. When a lesson needs something new and reusable, write it as a component in `assets/` and link to it; never inline code a future lesson would duplicate. A shared stylesheet is the first component every workspace earns: every lesson links it, so the lessons read as one consistent course rather than a pile of one-offs. As the workspace grows, so should the component library.
 
 **Forbidden in lesson mode:**
 
@@ -110,11 +110,11 @@ Adapted from the Socratic 5-phase tutoring method. The unit of dialogue mode is 
 3. **Mode detection** (before the phases): detect whether the topic is **Coding** (code, languages, APIs, architecture, algorithms, frameworks) or **General** (math, history, science, writing, philosophy). If ambiguous, ask briefly to confirm. Coding topics add the Phase 1 additions and Phase 3/4 specifics below; General topics use the flexible Phase 3 scaffolding.
 4. **5-Phase Tutoring** (per session, one session per request unless the user wants more):
 
-   - **Phase 1: Assessment** — probe 5 dimensions: conceptual understanding, problem-solving approach, tool fluency (if coding), confidence level, learning context. Skip dimensions already well-captured in the log. In Coding mode, also establish: language/environment, frameworks/constraints/existing code, and the success criterion.
-   - **Phase 2: Blueprinting ("Explain It Back")** — student articulates the problem in plain language. Listen for logic flaws, gaps, misconceptions. Ask questions that expose issues.
-   - **Phase 3: Progressive Execution** — 20% scaffold (boilerplate, method signatures, TODOs), 80% discovery. Give only Step 1, wait, then Step 2. Use the 5 Socratic question types — Clarifying → Probing → Connecting → Counter → Hypothetical (see `references/question-types.md` for each, with worked dialogue). In Coding mode, scaffold as TODOs, never implementations; in General mode, scaffold via Concept Mapping, Timeline/Narrative, or Problem Decomposition (see mode specifics below).
-   - **Phase 4: Socratic Debugging** — when student is wrong, ask guiding questions. **Never write the fix.** If the student is on the right track, deepen with harder questions. In Coding mode, follow the debugging guide below.
-   - **Phase 5: Metacognitive Closure** — student summarizes what they learned and why. Connect to future learning. Offer next steps **only if the student asks**.
+   - **Phase 1: Assessment**: probe 5 dimensions: conceptual understanding, problem-solving approach, tool fluency (if coding), confidence level, learning context. Skip dimensions already well-captured in the log. In Coding mode, also establish: language/environment, frameworks/constraints/existing code, and the success criterion.
+   - **Phase 2: Blueprinting ("Explain It Back")**: student articulates the problem in plain language. Listen for logic flaws, gaps, misconceptions. Ask questions that expose issues.
+   - **Phase 3: Progressive Execution**: 20% scaffold (boilerplate, method signatures, TODOs), 80% discovery. Give only Step 1, wait, then Step 2. Use the 5 Socratic question types: Clarifying → Probing → Connecting → Counter → Hypothetical (see `references/question-types.md` for each, with worked dialogue). In Coding mode, scaffold as TODOs, never implementations; in General mode, scaffold via Concept Mapping, Timeline/Narrative, or Problem Decomposition (see mode specifics below).
+   - **Phase 4: Socratic Debugging**: when student is wrong, ask guiding questions. **Never write the fix.** If the student is on the right track, deepen with harder questions. In Coding mode, follow the debugging guide below.
+   - **Phase 5: Metacognitive Closure**: student summarizes what they learned and why. Connect to future learning. Offer next steps **only if the student asks**.
 
 5. **Append session entry** to `dialogue-logs/<topic>.md`:
    - Date + session number
@@ -135,7 +135,7 @@ Adapted from the Socratic 5-phase tutoring method. The unit of dialogue mode is 
 
 ### Mode specifics
 
-*Coding — Phase 3 scaffolding* (provide structure with TODOs, not implementation):
+*Coding: Phase 3 scaffolding* (provide structure with TODOs, not implementation):
 
 ```python
 def solve_problem(input_data):
@@ -144,19 +144,19 @@ def solve_problem(input_data):
     # TODO: Phase 3 - Format & return output
 ```
 
-Then: *"Start with Phase 1 — what does input parsing look like?"* Let them fill in the TODOs.
+Then: *"Start with Phase 1: what does input parsing look like?"* Let them fill in the TODOs.
 
-*Coding — Phase 4 debugging guide:* when they hit a bug, walk through: (1) describe what's happening vs. expected, (2) where's the mismatch?, (3) add a log statement and observe, (4) which line is the issue? **Never write the fix** — guide them to it.
+*Coding: Phase 4 debugging guide:* when they hit a bug, walk through: (1) describe what's happening vs. expected, (2) where's the mismatch?, (3) add a log statement and observe, (4) which line is the issue? **Never write the fix**: guide them to it.
 
-*General — Phase 3 scaffolding:* adapt with flexible techniques — Concept Mapping (*"Let's visualize the relationships between X, Y, Z"*), Timeline/Narrative (*"Walk me through the sequence of events. Why did Y follow X?"*), Problem Decomposition (*"This has 3 parts. Tackle part 1 first."*). Phases 1, 2, 4, 5 remain the same.
+*General: Phase 3 scaffolding:* adapt with flexible techniques: Concept Mapping (*"Let's visualize the relationships between X, Y, Z"*), Timeline/Narrative (*"Walk me through the sequence of events. Why did Y follow X?"*), Problem Decomposition (*"This has 3 parts. Tackle part 1 first."*). Phases 1, 2, 4, 5 remain the same.
 
 ### Dialogue-mode reference docs
 
 For the deeper pedagogy, read the sibling files as needed:
 
-- `references/question-types.md` — the five Socratic question types with real dialogue samples (coding + general)
-- `references/phase-examples.md` — full worked examples of all five phases
-- `references/quiz-mode-guide.md` — the complete quiz workflow (activate, baseline, adaptive difficulty, feedback)
+- `references/question-types.md`: the five Socratic question types with real dialogue samples (coding + general)
+- `references/phase-examples.md`: full worked examples of all five phases
+- `references/quiz-mode-guide.md`: the complete quiz workflow (activate, baseline, adaptive difficulty, feedback)
 
 The quiz guide refers to `tutoring-state/` topic files; in `educator` those map to `dialogue-logs/<topic>.md` + `learning-records/`.
 
@@ -207,9 +207,9 @@ Every quiz result is logged in the same shape, parsed by `quiz-performance-track
 
 Three scripts in `scripts/`, all CLI with `--dir` flag (defaults to `.`). Python 3, standard library only. See `scripts/generate-knowledge-graph.py --help` etc. for usage.
 
-- `generate-knowledge-graph.py` — rebuilds `tutoring-state/knowledge-graph.md` from all state files.
-- `quiz-performance-tracker.py` — per-topic and overall quiz analytics.
-- `analyze-learning-patterns.py` — aggregate insights across topics and modes.
+- `generate-knowledge-graph.py`: rebuilds `tutoring-state/knowledge-graph.md` from all state files.
+- `quiz-performance-tracker.py`: per-topic and overall quiz analytics.
+- `analyze-learning-patterns.py`: aggregate insights across topics and modes.
 
 The agent should re-run `generate-knowledge-graph.py` at the end of each session to keep the index current.
 
@@ -217,8 +217,8 @@ The agent should re-run `generate-knowledge-graph.py` at the end of each session
 
 Each format spec is a sibling file. Read them when creating or parsing the corresponding artifact:
 
-- `MISSION-FORMAT.md` — `MISSION.md` content rules.
-- `RESOURCES-FORMAT.md` — `RESOURCES.md` content rules.
-- `LEARNING-RECORD-FORMAT.md` — `learning-records/<NNNN>-<slug>.md` content rules.
-- `DIALOGUE-LOG-FORMAT.md` — `dialogue-logs/<topic>.md` content rules.
-- `GLOSSARY-FORMAT.md` — `GLOSSARY.md` content rules.
+- `MISSION-FORMAT.md`: `MISSION.md` content rules.
+- `RESOURCES-FORMAT.md`: `RESOURCES.md` content rules.
+- `LEARNING-RECORD-FORMAT.md`: `learning-records/<NNNN>-<slug>.md` content rules.
+- `DIALOGUE-LOG-FORMAT.md`: `dialogue-logs/<topic>.md` content rules.
+- `GLOSSARY-FORMAT.md`: `GLOSSARY.md` content rules.

@@ -1,6 +1,6 @@
 # Quiz Mode: Complete Workflow Guide
 
-Comprehensive guide for activating and executing Quiz Mode—active recall testing with adaptive difficulty and Socratic feedback.
+Comprehensive guide for activating and executing Quiz Mode: active recall testing with adaptive difficulty and Socratic feedback.
 
 ---
 
@@ -306,7 +306,7 @@ Strengths:
 - Async/await syntax: mastered
 
 Areas to review:
-- Promise.all() vs Promise.race()—that was the tricky one
+- Promise.all() vs Promise.race(). That was the tricky one
 - Error handling with nested promises
 
 Next steps: You're ready for advanced async patterns (generators, streams).
@@ -399,7 +399,7 @@ You: "Exactly! That's polymorphism in action. You move to next question."
 
 Q3 [Advanced]:
 You: "Perfect. Now here's a harder one. You're designing a UI framework.
-You have Button, Checkbox, Dropdown—all different widgets. They all have
+You have Button, Checkbox, Dropdown: all different widgets. They all have
 render() and handleEvent(). But some can be nested, some can't. Some
 fire events, some don't. How do you handle this complexity while
 maintaining polymorphism?"
@@ -451,7 +451,7 @@ Strengths:
   [OK] Liskov Substitution Principle: understood after clarification
 
 Gaps:
-  [WARNING]  Complex interface hierarchies—struggled when constraints conflict
+  [WARNING]  Complex interface hierarchies: struggled when constraints conflict
   [WARNING]  First instinct wasn't composition vs inheritance tradeoff
 
 Quiz Stats: 4 questions, 3 correct, 75% accuracy
@@ -485,7 +485,7 @@ You: "Perfect. [Shift back to Tutoring Mode for 15 min, then re-quiz if time]"
 
 7. **Track as you go.** Keep a running tally so you have data for the summary.
 
-8. **End on success.** If possible, end quiz with a question they can ace—builds confidence for future learning.
+8. **End on success.** If possible, end quiz with a question they can ace: builds confidence for future learning.
 
 9. **Update state file.** Immediately after quiz, update state file with performance metrics and gaps. This matters for next quiz.
 

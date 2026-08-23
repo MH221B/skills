@@ -18,8 +18,8 @@ Look at the current repo to understand its starting state. Read whatever exists;
 
 - `CONTEXT.md` and `CONTEXT-MAP.md` at the repo root
 - `docs/adr/` and any `src/*/docs/adr/` directories (multi-context repos)
-- `AGENTS.md` and `CLAUDE.md` at the repo root — does either exist? Is there already an `## Agent skills` section in either?
-- `docs/agents/` — does this skill's prior output already exist?
+- `AGENTS.md` and `CLAUDE.md` at the repo root: does either exist? Is there already an `## Agent skills` section in either?
+- `docs/agents/`: does this skill's prior output already exist?
 
 ### 2. Present findings and ask
 
@@ -29,8 +29,8 @@ Summarise what's present and what's missing. Then confirm the domain-docs layout
 
 Confirm the layout:
 
-- **Single-context** — one `CONTEXT.md` + `docs/adr/` at the repo root. Most repos are this.
-- **Multi-context** — `CONTEXT-MAP.md` at the root pointing to per-context `CONTEXT.md` files (typically a monorepo).
+- **Single-context**: one `CONTEXT.md` + `docs/adr/` at the repo root. Most repos are this.
+- **Multi-context**: `CONTEXT-MAP.md` at the root pointing to per-context `CONTEXT.md` files (typically a monorepo).
 
 ### 3. Confirm and edit
 
@@ -47,9 +47,9 @@ Let them edit before writing.
 
 - If `CLAUDE.md` exists, edit it.
 - Else if `AGENTS.md` exists, edit it.
-- If neither exists, ask the user which one to create — don't pick for them.
+- If neither exists, ask the user which one to create: don't pick for them.
 
-Never create `AGENTS.md` when `CLAUDE.md` already exists (or vice versa) — always edit the one that's already there.
+Never create `AGENTS.md` when `CLAUDE.md` already exists (or vice versa): always edit the one that's already there.
 
 If an `## Agent skills` block already exists in the chosen file, update its contents in-place rather than appending a duplicate. Don't overwrite user edits to the surrounding sections.
 
@@ -60,11 +60,11 @@ The block:
 
 ### Domain docs
 
-[one-line summary of layout — "single-context" or "multi-context"]. See `docs/agents/domain.md`.
+[one-line summary of layout: "single-context" or "multi-context"]. See `docs/agents/domain.md`.
 ```
 
 Then write `docs/agents/domain.md` using the [domain.md](./domain.md) seed template in this skill folder as a starting point.
 
 ### 5. Done
 
-Tell the user the setup is complete and which engineering skills will now read from `docs/agents/domain.md`. Mention they can edit `docs/agents/domain.md` directly later — re-running this skill is only necessary if the repo moves between single- and multi-context layouts.
+Tell the user the setup is complete and which engineering skills will now read from `docs/agents/domain.md`. Mention they can edit `docs/agents/domain.md` directly later: re-running this skill is only necessary if the repo moves between single- and multi-context layouts.

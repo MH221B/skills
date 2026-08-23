@@ -47,7 +47,7 @@ A dialogue log is the append-only record of all Socratic sessions on a single to
 
 ## Progress Over Time
 
-### Session 1 — <YYYY-MM-DD>
+### Session 1: <YYYY-MM-DD>
 - **Phase 1 (Assessment):** <summary>
 - **Phase 2 (Blueprinting):** <summary>
 - **Phase 3 (Progressive Execution):** <summary>
@@ -57,7 +57,7 @@ A dialogue log is the append-only record of all Socratic sessions on a single to
 - **New misconceptions:** []
 - **New glossary terms:** [event-loop]
 
-### Session 2 — <YYYY-MM-DD>
+### Session 2: <YYYY-MM-DD>
 - ...
 
 ## Quiz Performance Tracking

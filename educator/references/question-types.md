@@ -128,7 +128,7 @@ Five core question types used throughout Phase 3 (Execution & Progressive Questi
 
 **You (Counter):** "Interesting perspective. But I have a question: if zero taxes are best for the economy, why don't countries with no taxes have the strongest economies? What's happening there?"
 
-**Expected outcome:** Student realizes the relationship is more nuanced—taxes fund infrastructure, education, etc. Begins to think in tradeoffs.
+**Expected outcome:** Student realizes the relationship is more nuanced: taxes fund infrastructure, education, etc. Begins to think in tradeoffs.
 
 ---
 

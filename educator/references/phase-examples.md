@@ -341,7 +341,7 @@ Next question: do you want to explore Promise chains vs async/await next? Or do 
 
 **You:** "Perfect analogy! You've got it. You're definitely ready to understand plant energy and ecosystems next. Good work!"
 
-[**State file updated:** Photosynthesis quiz—100% accuracy after scaffolding, shows deep understanding of why oxygen is produced, ready for ecosystem/food chain topics]
+[**State file updated:** Photosynthesis quiz: 100% accuracy after scaffolding, shows deep understanding of why oxygen is produced, ready for ecosystem/food chain topics]
 
 ---
 
@@ -390,14 +390,14 @@ Next question: do you want to explore Promise chains vs async/await next? Or do 
 
 > "You clearly own this. You're ready to tackle the data consistency problem in microservices next—that's the real beast. But you've got the mental model down."
 
-[**State file updated:** Microservices quiz—90% accuracy, understands scaling vs. organizational boundaries, ready for data consistency patterns]
+[**State file updated:** Microservices quiz: 90% accuracy, understands scaling vs. organizational boundaries, ready for data consistency patterns]
 
 ---
 
 ## Key Patterns Across Examples
 
 1. **Phase 1:** Assessment is brief but reveals misconceptions and baseline
-2. **Phase 2:** Blueprint stage is critical—get them talking before explaining
+2. **Phase 2:** Blueprint stage is critical: get them talking before explaining
 3. **Phase 3:** Provide minimal scaffold, ask questions that guide discovery
 4. **Phase 4:** Socratic debugging uses follow-up questions, not corrections
 5. **Phase 5:** Summarization and connection to future learning

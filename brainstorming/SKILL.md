@@ -15,20 +15,20 @@ Do NOT invoke any implementation skill, write any code, scaffold any project, or
 
 ## Anti-Pattern: "This Is Too Simple To Need A Design"
 
-Every project goes through this process. A todo list, a single-function utility, a config change — all of them. "Simple" projects are where unexamined assumptions cause the most wasted work. The design can be short (a few sentences for truly simple projects), but you MUST present it and get approval.
+Every project goes through this process. A todo list, a single-function utility, a config change: all of them. "Simple" projects are where unexamined assumptions cause the most wasted work. The design can be short (a few sentences for truly simple projects), but you MUST present it and get approval.
 
 ## Checklist
 
 You MUST create a task for each of these items and complete them in order:
 
-1. **Explore project context** — dispatch subagents to survey files, docs, and recent commits in parallel, then ask your first questions against their findings
-2. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria
-3. **Propose 2-3 approaches** — with trade-offs and your recommendation
-4. **Present design** — in sections scaled to their complexity, get user approval after each section
-5. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` (do not commit the doc)
-6. **Spec self-review** — quick inline check for placeholders, contradictions, ambiguity, scope (see below)
-7. **User reviews written spec** — ask user to review the spec file before proceeding
-8. **Transition to implementation** — invoke writing-plans skill to create implementation plan
+1. **Explore project context**: dispatch subagents to survey files, docs, and recent commits in parallel, then ask your first questions against their findings
+2. **Ask clarifying questions**: one at a time, understand purpose/constraints/success criteria
+3. **Propose 2-3 approaches**: with trade-offs and your recommendation
+4. **Present design**: in sections scaled to their complexity, get user approval after each section
+5. **Write design doc**: save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` (do not commit the doc)
+6. **Spec self-review**: quick inline check for placeholders, contradictions, ambiguity, scope (see below)
+7. **User reviews written spec**: ask user to review the spec file before proceeding
+8. **Transition to implementation**: invoke writing-plans skill to create implementation plan
 
 ## Process Flow
 
@@ -83,7 +83,7 @@ digraph brainstorming {
 - Once you believe you understand what you're building, present the design
 - Scale each section to its complexity: a few sentences if straightforward, up to 200-300 words if nuanced
 - Ask after each section whether it looks right so far
-- Cover: architecture, components, data flow, error handling, and verification — how we'll know it works (a runnable command, existing tests, a manual check, or new tests, matching the user's stated testing stance). Do not assume TDD.
+- Cover: architecture, components, data flow, error handling, and verification: how we'll know it works (a runnable command, existing tests, a manual check, or new tests, matching the user's stated testing stance). Do not assume TDD.
 - Be ready to go back and clarify if something doesn't make sense
 
 **Design for isolation and clarity:**
@@ -116,12 +116,12 @@ After writing the spec document, look at it with fresh eyes:
 3. **Scope check:** Is this focused enough for a single implementation plan, or does it need decomposition?
 4. **Ambiguity check:** Could any requirement be interpreted two different ways? If so, pick one and make it explicit.
 
-Fix any issues inline. No need to re-review — just fix and move on.
+Fix any issues inline. No need to re-review: just fix and move on.
 
 **User Review Gate:**
 After the spec review loop passes, ask the user to review the written spec before proceeding:
 
-> "Spec written to `<path>` (not committed). Please review it and let me know if you want to make any changes before we start writing out the implementation plan."
+> "Spec written to `<path>` (not committed). Please review it, then tell me any changes, or say 'start writing the plan'."
 
 Wait for the user's response. If they request changes, make them and re-run the spec review loop. Only proceed once the user approves.
 
@@ -129,7 +129,7 @@ Wait for the user's response. If they request changes, make them and re-run the 
 
 - Invoke the writing-plans skill to create a detailed implementation plan
 - Pass along the user's testing stance (or that no tests are wanted) so the plan's tasks and verification steps match.
-- Do NOT invoke any other skill. writing-plans is the next step.
+- Do NOT invoke any other skill: writing-plans is the next step.
 
 ## Key Principles
 
