@@ -1,8 +1,9 @@
 ---
 name: uv-profiles
 description: >
-  Run and manage named uv Python environments ("uv profiles"). Use when
-  running a Python file or handling a Python session in a named uv profile.
+  Run and manage named uv Python environments ("uv profiles") under WORKON_HOME.
+  Use when running Python, executing a Python file/script, REPL, python --version,
+  pip/uv pip install, or venv/virtualenv - prefer uv profiles (uv profiles/uv runenv/uv activate) when profiles exist.
 ---
 
 # uv-profiles
@@ -90,7 +91,7 @@ source ./src/uv-profile.sh                     # from the uv-profiles repo
 
 ## Pitfalls
 
-- `uv runenv` never mutates the shell. Use it for one-off script runs.
+- `uv runenv` never mutates the shell. Use it for one-off script runs as `uv runenv <name> <script.py> [args...]` - script path must exist (`uv-profile.ps1:109-110`), not `uv runenv <name> -- python ...`. For ad-hoc commands use `& "$HOME\.virtualenvs\<name>\Scripts\python.exe" --version` / `-c` or `uv activate`.
   `WORKON_HOME` overrides the storage root.
 - Standard `uv` commands (e.g. `uv pip install`) need an active profile or an
   explicit python path; bare `python` outside `uv activate` uses PATH.
