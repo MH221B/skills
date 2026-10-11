@@ -48,6 +48,7 @@ Each skill lives in its own folder with a `SKILL.md` file. Here the folder is re
 - **caveman**: Ultra-compressed communication mode (roughly 75% fewer tokens)
 - **wait-what**: Stop and re-pitch when the last message didn't land
 - **setup-domain-docs**: Set up the domain-docs convention (CONTEXT.md / ADRs) for the engineering skills
+- **pdf-extract**: Get text out of PDFs and other documents. Tries markitdown first, falls back to Tesseract OCR for scanned/image-only PDFs, and provisions its own conda env + language data on demand
 - **unslop**: Strip AI tells from writing and put a human voice back in
 
 ## Workflow
