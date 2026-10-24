@@ -7,11 +7,11 @@ description: Use when you have a spec or requirements for a multi-step task, bef
 
 ## Overview
 
-Plans are produced in two passes, so the expensive orchestrator model spends its tokens on structure and decisions while the cheaper worker model writes the detail:
+Plans are produced in two passes, so the orchestrator spends its tokens on structure and decisions while the worker subagent writes the detail:
 
 - **Pass 1, high-level plan (orchestrator):** goal, file map, ordered task list with acceptance criteria. No implementation code.
-- **Pass 2, detail expansion (`general` agent):** reads the spec and the high-level plan, then expands the plan in place with the exact code, commands, and commit steps.
-- **Delegated execution:** the orchestrator tells the `general` agent to read the spec and the plan and implement a task or range of tasks. Delegate by reference; never paste task content into prompts.
+- **Pass 2, detail expansion (worker subagent):** reads the spec and the high-level plan, then expands the plan in place with the exact code, commands, and commit steps.
+- **Delegated execution:** the orchestrator tells the worker subagent to read the spec and the plan and implement a task or range of tasks. Delegate by reference; never paste task content into prompts.
 
 The finished plan must let a skilled developer with zero context for this codebase and problem domain implement each task without getting stuck. DRY. YAGNI.
 
@@ -68,9 +68,9 @@ Rules for the high-level plan:
 - No implementation code. The single exception: pin an interface when the decision itself matters (a function signature, a data schema, a config format) and mark it **Pinned** so the detail pass preserves it.
 - Mark tasks that can run in parallel; everything else executes in order.
 
-## Pass 2: detail expansion (`general` agent)
+## Pass 2: detail expansion (worker subagent)
 
-Dispatch the `general` agent:
+Dispatch the worker subagent:
 
 > Read the spec at `[SPEC_FILE_PATH]` and the plan at `[PLAN_FILE_PATH]`. Expand the plan in place into a detailed version: for every task, replace **What** with concrete checkbox steps: the exact code for each change and the verify command with its expected output. Keep the task list, its order, and the file paths unchanged. Where the plan conflicts with the spec, flag it in the plan instead of silently resolving it.
 
@@ -140,7 +140,7 @@ After the detail pass returns, check the expanded plan with fresh eyes:
 2. **Placeholder scan:** any pattern from "No Placeholders"? Fix them.
 3. **Type consistency:** do the types, method signatures, and property names match across tasks? A function called `clearLayers()` in Task 3 but `clearFullLayers()` in Task 7 is a bug.
 
-Then dispatch `plan-document-reviewer-prompt.md` to the `general` agent, replacing `[PLAN_FILE_PATH]` and `[SPEC_FILE_PATH]` with the actual paths. Fix any **Issues** it reports; **Recommendations** are advisory.
+Then dispatch `plan-document-reviewer-prompt.md` to a general-purpose subagent, replacing `[PLAN_FILE_PATH]` and `[SPEC_FILE_PATH]` with the actual paths. Fix any **Issues** it reports; **Recommendations** are advisory.
 
 ## Plan document handling
 
@@ -153,7 +153,7 @@ After the plan review, ask the user to verify before proceeding:
 **"Plan complete and saved to `docs/superpowers/plans/<filename>.md` (not committed). Please review the plan, then tell me any changes, or say 'start executing'."**
 
 - Wait for user approval before starting execution.
-- First dispatch: tell the `general` agent: "Read the spec at `<spec path>` and the plan at `<plan path>`. Implement Tasks N-M. Follow the plan's steps and verification." If the Pass 2 expansion session is still available, continue it by session ID instead. It already holds the spec, plan, and codebase context, so the prompt is just "Continue: implement Tasks N-M."
+- First dispatch: tell the worker subagent: "Read the spec at `<spec path>` and the plan at `<plan path>`. Implement Tasks N-M. Follow the plan's steps and verification." If the Pass 2 expansion session is still available, continue it by session ID instead. It already holds the spec, plan, and codebase context, so the prompt is just "Continue: implement Tasks N-M."
 - Reuse the worker session for sequential ranges: every dispatch returns a session ID; continue it ("Implement Tasks N-M next") rather than starting fresh. The worker keeps its context, skips re-reading the spec and plan, and the re-sent history bills mostly as prompt-cache reads. Start fresh only when the session is gone, the model changed, or it has drifted (stale file states, accumulated dead ends). Parallel task ranges always get separate sessions.
 - After parallel ranges converge: continue the session whose work the next range builds on (same files or subsystem). It made those changes, so its view is current; name the files the other sessions modified so it re-reads them first. If the next range integrates several sessions' work, start fresh: each parallel session's memory of the others' files is stale, and a fresh worker reads the real current state.
 - Plans have no commit steps. The worker implements and verifies; committing is decided outside the plan.

@@ -7,8 +7,7 @@ Use this template when dispatching a plan document reviewer subagent.
 **Dispatch after:** The complete plan is written.
 
 ```
-Dispatch with the subagent tool:
-  agent: "general"
+Dispatch to a general-purpose subagent:
   description: "Review plan document"
   prompt: |
     You are a plan document reviewer. Verify this plan is complete and ready for implementation.

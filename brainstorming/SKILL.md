@@ -26,7 +26,7 @@ You MUST create a task for each of these items and complete them in order:
 3. **Propose 2-3 approaches**: with trade-offs and your recommendation
 4. **Present design**: in sections scaled to their complexity, get user approval after each section
 5. **Write design doc**: save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` (do not commit the doc)
-6. **Spec review**: quick inline check for placeholders, contradictions, ambiguity, scope, then dispatch the reviewer template to the `general` agent (see below)
+6. **Spec review**: quick inline check for placeholders, contradictions, ambiguity, scope, then dispatch the reviewer template to a general-purpose subagent (see below)
 7. **User reviews written spec**: ask user to review the spec file before proceeding
 8. **Transition to implementation**: invoke writing-plans skill to create implementation plan
 
@@ -40,7 +40,7 @@ digraph brainstorming {
     "Present design sections" [shape=box];
     "User approves design?" [shape=diamond];
     "Write design doc" [shape=box];
-    "Spec review\n(self + `general` agent)" [shape=box];
+    "Spec review\n(self + subagent)" [shape=box];
     "User reviews spec?" [shape=diamond];
     "Invoke writing-plans skill" [shape=doublecircle];
 
@@ -50,8 +50,8 @@ digraph brainstorming {
     "Present design sections" -> "User approves design?";
     "User approves design?" -> "Present design sections" [label="no, revise"];
     "User approves design?" -> "Write design doc" [label="yes"];
-    "Write design doc" -> "Spec review\n(self + `general` agent)";
-    "Spec review\n(self + `general` agent)" -> "User reviews spec?";
+    "Write design doc" -> "Spec review\n(self + subagent)";
+    "Spec review\n(self + subagent)" -> "User reviews spec?";
     "User reviews spec?" -> "Write design doc" [label="changes requested"];
     "User reviews spec?" -> "Invoke writing-plans skill" [label="approved"];
 }
@@ -63,7 +63,7 @@ digraph brainstorming {
 
 **Understanding the idea:**
 
-- Spin up subagents to check the current project state first: survey files, docs, and recent commits in parallel so the reading doesn't block the conversation. Dispatch the `explore` agent for codebase structure, docs, and recent commit history; give it several targeted questions rather than one broad sweep, since it works best with focused lookups. Dispatch the `general` agent for any open-ended research the idea needs (libraries, APIs, prior art). Ask your first clarifying question while they run, and fold their findings into later questions. Keep each subagent's session ID and continue that same session for follow-ups instead of re-priming a fresh one.
+- Spin up subagents to check the current project state first: survey files, docs, and recent commits in parallel so the reading doesn't block the conversation. Dispatch an explore-style subagent for codebase structure, docs, and recent commit history; give it several targeted questions rather than one broad sweep, since it works best with focused lookups. Dispatch a general-purpose subagent for any open-ended research the idea needs (libraries, APIs, prior art). Ask your first clarifying question while they run, and fold their findings into later questions. Keep each subagent's session ID and continue that same session for follow-ups instead of re-priming a fresh one.
 - Before asking detailed questions, assess scope: if the request describes multiple independent subsystems (e.g., "build a platform with chat, file storage, billing, and analytics"), flag this immediately. Don't spend questions refining details of a project that needs to be decomposed first.
 - If the project is too large for a single spec, help the user decompose into sub-projects: what are the independent pieces, how do they relate, what order should they be built? Then brainstorm the first sub-project through the normal design flow. Each sub-project gets its own spec → plan → implementation cycle.
 - For appropriately-scoped projects, ask questions one at a time to refine the idea
@@ -119,7 +119,7 @@ After writing the spec document, look at it with fresh eyes:
 Fix any issues inline. No need to re-review, just fix and move on.
 
 **Independent Review:**
-Dispatch `spec-document-reviewer-prompt.md` to the `general` agent as a subagent, replacing `[SPEC_FILE_PATH]` with the actual path. Fix any **Issues** it reports; **Recommendations** are advisory. Cross-model review catches what self-review misses.
+Dispatch `spec-document-reviewer-prompt.md` to a general-purpose subagent, replacing `[SPEC_FILE_PATH]` with the actual path. Fix any **Issues** it reports; **Recommendations** are advisory. Independent review catches what self-review misses.
 
 **User Review Gate:**
 After the spec review loop passes, ask the user to review the written spec before proceeding:
