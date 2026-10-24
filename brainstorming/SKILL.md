@@ -3,7 +3,7 @@ name: brainstorming
 description: "You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation."
 ---
 
-# Brainstorming Ideas Into Designs
+# Brainstorming ideas into designs
 
 Help turn ideas into fully formed designs and specs through natural collaborative dialogue.
 
@@ -13,7 +13,7 @@ Start by understanding the current project context, then ask questions one at a 
 Do NOT invoke any implementation skill, write any code, scaffold any project, or take any implementation action until you have presented a design and the user has approved it. This applies to EVERY project regardless of perceived simplicity.
 </HARD-GATE>
 
-## Anti-Pattern: "This Is Too Simple To Need A Design"
+## Anti-pattern: "This is too simple to need a design"
 
 Every project goes through this process. A todo list, a single-function utility, a config change: all of them. "Simple" projects are where unexamined assumptions cause the most wasted work. The design can be short (a few sentences for truly simple projects), but you MUST present it and get approval.
 
@@ -26,11 +26,11 @@ You MUST create a task for each of these items and complete them in order:
 3. **Propose 2-3 approaches**: with trade-offs and your recommendation
 4. **Present design**: in sections scaled to their complexity, get user approval after each section
 5. **Write design doc**: save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` (do not commit the doc)
-6. **Spec self-review**: quick inline check for placeholders, contradictions, ambiguity, scope (see below)
+6. **Spec review**: quick inline check for placeholders, contradictions, ambiguity, scope, then dispatch the reviewer template to the `general` agent (see below)
 7. **User reviews written spec**: ask user to review the spec file before proceeding
 8. **Transition to implementation**: invoke writing-plans skill to create implementation plan
 
-## Process Flow
+## Process flow
 
 ```dot
 digraph brainstorming {
@@ -40,7 +40,7 @@ digraph brainstorming {
     "Present design sections" [shape=box];
     "User approves design?" [shape=diamond];
     "Write design doc" [shape=box];
-    "Spec self-review\n(fix inline)" [shape=box];
+    "Spec review\n(self + `general` agent)" [shape=box];
     "User reviews spec?" [shape=diamond];
     "Invoke writing-plans skill" [shape=doublecircle];
 
@@ -50,8 +50,8 @@ digraph brainstorming {
     "Present design sections" -> "User approves design?";
     "User approves design?" -> "Present design sections" [label="no, revise"];
     "User approves design?" -> "Write design doc" [label="yes"];
-    "Write design doc" -> "Spec self-review\n(fix inline)";
-    "Spec self-review\n(fix inline)" -> "User reviews spec?";
+    "Write design doc" -> "Spec review\n(self + `general` agent)";
+    "Spec review\n(self + `general` agent)" -> "User reviews spec?";
     "User reviews spec?" -> "Write design doc" [label="changes requested"];
     "User reviews spec?" -> "Invoke writing-plans skill" [label="approved"];
 }
@@ -59,16 +59,16 @@ digraph brainstorming {
 
 **The terminal state is invoking writing-plans.** Do NOT invoke frontend-design, mcp-builder, or any other implementation skill. The ONLY skill you invoke after brainstorming is writing-plans.
 
-## The Process
+## The process
 
 **Understanding the idea:**
 
-- Spin up subagents to check the current project state first: survey files, docs, and recent commits in parallel so the reading doesn't block the conversation. Dispatch an explore-style subagent for codebase structure and docs, another for recent commit history, and a general subagent for any open-ended research the idea needs (libraries, APIs, prior art). Ask your first clarifying question while they run, and fold their findings into later questions.
+- Spin up subagents to check the current project state first: survey files, docs, and recent commits in parallel so the reading doesn't block the conversation. Dispatch the `explore` agent for codebase structure, docs, and recent commit history; give it several targeted questions rather than one broad sweep, since it works best with focused lookups. Dispatch the `general` agent for any open-ended research the idea needs (libraries, APIs, prior art). Ask your first clarifying question while they run, and fold their findings into later questions. Keep each subagent's session ID and continue that same session for follow-ups instead of re-priming a fresh one.
 - Before asking detailed questions, assess scope: if the request describes multiple independent subsystems (e.g., "build a platform with chat, file storage, billing, and analytics"), flag this immediately. Don't spend questions refining details of a project that needs to be decomposed first.
 - If the project is too large for a single spec, help the user decompose into sub-projects: what are the independent pieces, how do they relate, what order should they be built? Then brainstorm the first sub-project through the normal design flow. Each sub-project gets its own spec → plan → implementation cycle.
 - For appropriately-scoped projects, ask questions one at a time to refine the idea
 - Prefer multiple choice questions when possible, but open-ended is fine too
-- Only one question per message - if a topic needs more exploration, break it into multiple questions
+- Only one question per message. If a topic needs more exploration, break it into multiple questions
 - Focus on understanding: purpose, constraints, success criteria
 - Ask about testing stance early: does the user want tests written at all, and if so test-first or after implementation? This is their preference, not a skill default.
 
@@ -83,7 +83,7 @@ digraph brainstorming {
 - Once you believe you understand what you're building, present the design
 - Scale each section to its complexity: a few sentences if straightforward, up to 200-300 words if nuanced
 - Ask after each section whether it looks right so far
-- Cover: architecture, components, data flow, error handling, and verification: how we'll know it works (a runnable command, existing tests, a manual check, or new tests, matching the user's stated testing stance). Do not assume TDD.
+- Cover architecture, components, data flow, error handling, and verification. For verification, state how we'll know it works: a runnable command, existing tests, a manual check, or new tests, matching the user's stated testing stance. Do not assume TDD.
 - Be ready to go back and clarify if something doesn't make sense
 
 **Design for isolation and clarity:**
@@ -91,21 +91,21 @@ digraph brainstorming {
 - Break the system into smaller units that each have one clear purpose, communicate through well-defined interfaces, and can be understood and tested independently
 - For each unit, you should be able to answer: what does it do, how do you use it, and what does it depend on?
 - Can someone understand what a unit does without reading its internals? Can you change the internals without breaking consumers? If not, the boundaries need work.
-- Smaller, well-bounded units are also easier for you to work with - you reason better about code you can hold in context at once, and your edits are more reliable when files are focused. When a file grows large, that's often a signal that it's doing too much.
+- Smaller, well-bounded units are also easier for you to work with. You reason better about code you can hold in context at once, and your edits are more reliable when files are focused. When a file grows large, that's often a signal that it's doing too much.
 
 **Working in existing codebases:**
 
 - Explore the current structure before proposing changes (subagents are the default here too, so discussion isn't blocked on reading). Follow existing patterns.
-- Where existing code has problems that affect the work (e.g., a file that's grown too large, unclear boundaries, tangled responsibilities), include targeted improvements as part of the design - the way a good developer improves code they're working in.
+- Where existing code has problems that affect the work (e.g., a file that's grown too large, unclear boundaries, tangled responsibilities), include targeted improvements as part of the design, the way a good developer improves code they're working in.
 - Don't propose unrelated refactoring. Stay focused on what serves the current goal.
 
-## After the Design
+## After the design
 
 **Documentation:**
 
 - Write the validated design (spec) to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`
   - (User preferences for spec location override this default)
-- Use elements-of-style:writing-clearly-and-concisely skill if available
+- Run the spec's prose through the `unslop` skill if available
 - Do NOT commit the spec document
 
 **Spec Self-Review:**
@@ -116,7 +116,10 @@ After writing the spec document, look at it with fresh eyes:
 3. **Scope check:** Is this focused enough for a single implementation plan, or does it need decomposition?
 4. **Ambiguity check:** Could any requirement be interpreted two different ways? If so, pick one and make it explicit.
 
-Fix any issues inline. No need to re-review: just fix and move on.
+Fix any issues inline. No need to re-review, just fix and move on.
+
+**Independent Review:**
+Dispatch `spec-document-reviewer-prompt.md` to the `general` agent as a subagent, replacing `[SPEC_FILE_PATH]` with the actual path. Fix any **Issues** it reports; **Recommendations** are advisory. Cross-model review catches what self-review misses.
 
 **User Review Gate:**
 After the spec review loop passes, ask the user to review the written spec before proceeding:
@@ -131,12 +134,12 @@ Wait for the user's response. If they request changes, make them and re-run the 
 - Pass along the user's testing stance (or that no tests are wanted) so the plan's tasks and verification steps match.
 - Do NOT invoke any other skill: writing-plans is the next step.
 
-## Key Principles
+## Key principles
 
-- **One question at a time** - Don't overwhelm with multiple questions
-- **Multiple choice preferred** - Easier to answer than open-ended when possible
-- **YAGNI ruthlessly** - Remove unnecessary features from all designs
-- **Explore alternatives** - Always propose 2-3 approaches before settling
-- **Incremental validation** - Present design, get approval before moving on
-- **Be flexible** - Go back and clarify when something doesn't make sense
+- **One question at a time.** Don't overwhelm with multiple questions
+- **Multiple choice preferred.** Easier to answer than open-ended when possible
+- **YAGNI ruthlessly.** Remove unnecessary features from all designs
+- **Explore alternatives.** Always propose 2-3 approaches before settling
+- **Incremental validation.** Present design, get approval before moving on
+- **Be flexible.** Go back and clarify when something doesn't make sense
 

@@ -1,4 +1,4 @@
-# Plan Document Reviewer Prompt Template
+# Plan document reviewer prompt template
 
 Use this template when dispatching a plan document reviewer subagent.
 
@@ -7,7 +7,8 @@ Use this template when dispatching a plan document reviewer subagent.
 **Dispatch after:** The complete plan is written.
 
 ```
-Task tool (general-purpose):
+Dispatch with the subagent tool:
+  agent: "general"
   description: "Review plan document"
   prompt: |
     You are a plan document reviewer. Verify this plan is complete and ready for implementation.
@@ -15,7 +16,7 @@ Task tool (general-purpose):
     **Plan to review:** [PLAN_FILE_PATH]
     **Spec for reference:** [SPEC_FILE_PATH]
 
-    ## What to Check
+    ## What to check
 
     | Category | What to Look For |
     |----------|------------------|
@@ -33,9 +34,9 @@ Task tool (general-purpose):
     Approve unless there are serious gaps: missing requirements from the spec,
     contradictory steps, placeholder content, or tasks so vague they can't be acted on.
 
-    ## Output Format
+    ## Output format
 
-    ## Plan Review
+    ## Plan review
 
     **Status:** Approved | Issues Found
 

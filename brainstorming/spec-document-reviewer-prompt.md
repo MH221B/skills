@@ -1,4 +1,4 @@
-# Spec Document Reviewer Prompt Template
+# Spec document reviewer prompt template
 
 Use this template when dispatching a spec document reviewer subagent.
 
@@ -7,14 +7,15 @@ Use this template when dispatching a spec document reviewer subagent.
 **Dispatch after:** Spec document is written to docs/superpowers/specs/
 
 ```
-Task tool (general-purpose):
+Dispatch with the subagent tool:
+  agent: "general"
   description: "Review spec document"
   prompt: |
     You are a spec document reviewer. Verify this spec is complete and ready for planning.
 
     **Spec to review:** [SPEC_FILE_PATH]
 
-    ## What to Check
+    ## What to check
 
     | Category | What to Look For |
     |----------|------------------|
@@ -33,9 +34,9 @@ Task tool (general-purpose):
 
     Approve unless there are serious gaps that would lead to a flawed plan.
 
-    ## Output Format
+    ## Output format
 
-    ## Spec Review
+    ## Spec review
 
     **Status:** Approved | Issues Found
 
