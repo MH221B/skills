@@ -1,5 +1,30 @@
 # pdf-extract — reference
 
+## Office files and legacy formats
+
+markitdown handles OOXML (`.docx`, `.xlsx`, `.pptx`) and text PDFs natively.
+
+Binary Office formats from before 2007 (`.doc`, `.xls`, `.ppt`) are **not** recognised — markitdown raises a conversion error rather than guessing. Convert first:
+
+```powershell
+$word = New-Object -ComObject Word.Application
+$word.Visible = $false
+$doc = $word.Documents.Open("C:\path\in.doc", $false, $true)
+$doc.SaveAs2("C:\path\in.docx", 16)   # wdFormatDocumentDefault
+$doc.Close(0)
+$word.Quit()
+```
+
+- `SaveAs2` takes a plain string path here. The older `SaveAs([ref]$path, [ref]16)` form fails from PowerShell with *"Cannot convert the psobject value ... to type Object"*.
+- Always `Close(0)` and `Quit()` in a `finally` block; a hidden Word instance with an unsaved document keeps the file locked and silently stalls the next run.
+- LibreOffice equivalent: `soffice --headless --convert-to docx "C:\path\in.doc" --outdir "C:\path\out"`.
+
+Long documents belong on disk, not in the chat:
+
+```powershell
+conda run -n pdf-ocr python -m markitdown "C:\path\in.docx" -o "C:\path\out.md"
+```
+
 ## Why three tiers?
 
 - **markitdown** reads documents that already contain a text layer. It is exact, instant, and needs no software install. It is the default for every file.
@@ -118,6 +143,10 @@ Use v1. v2 needs a hand-patched llama.cpp build, and converting v2 with the v1 c
 - **winget blocked / no admin** → install Tesseract manually (UB-Mannheim build) and re-run setup; it will detect `tesseract.exe`.
 - **`conda` not on PATH** → call it by full path (`$env:USERPROFILE\miniconda3\Scripts\conda.exe`) or run `conda init`.
 - **markitdown output looks like English gibberish on a foreign document** → that is a bad embedded OCR layer; ignore it and OCR again.
+- **`FileConversionException` / `DocxConverter threw MissingDependencyException`** → the local `markitdown` install lacks the format extras. `pip install "markitdown[docx,pdf]"` and re-run. The MCP server is not affected.
+- **markitdown refuses a `.doc`/`.xls`/`.ppt`** → legacy binary format, unsupported by design. Convert to `.docx`/`.xlsx`/`.pptx` (Word COM or LibreOffice) and extract that.
+- **`conda run` dies with `UnicodeEncodeError: 'charmap'` / `0xC0000409`-style crash on a Unicode path** → conda relays the child's stdout through the console codepage (cp1252 on many Windows hosts). Either call the env interpreter directly (`C:\Users\<you>\miniconda3\envs\pdf-ocr\python.exe ...`) or set `$env:PYTHONIOENCODING = "utf-8"` first. The conversion itself already succeeded when this happens.
+- **Vietnamese/CJK text prints as `?` or `�` in the terminal** → console rendering, not corruption. Check the saved file with Python before "fixing" anything: `python -c "import io;t=io.open(r'C:\p\out.md',encoding='utf-8').read();print(len(t), sum(1 for c in t if ord(c)>127))"`. A large non-ASCII count means the text is intact.
 - **Empty pages in OCR output** → the page image may be blank or extremely low resolution; check with `--dpi 400`.
 
 ## Related (optional)

@@ -25,6 +25,33 @@ Spot-check a suspicious file (page count + extractable text, no OCR run):
 conda run -n pdf-ocr python scripts/ocr_pdf.py --check "C:\path\doc.pdf"
 ```
 
+### Office files
+
+markitdown reads `.docx`, `.xlsx`, `.pptx`, and text PDFs directly.
+
+**Legacy binary formats (`.doc`, `.xls`, `.ppt`, pre-2007) are not supported.** Convert first, then run markitdown on the converted file. On Windows, Word COM does it with nothing to install:
+
+```powershell
+$word = New-Object -ComObject Word.Application
+$word.Visible = $false
+$doc = $word.Documents.Open("C:\path\in.doc", $false, $true)
+$doc.SaveAs2("C:\path\in.docx", 16)   # 16 = wdFormatDocumentDefault
+$doc.Close(0)
+$word.Quit()
+```
+
+For a whole folder, wrap that in `Get-ChildItem *.doc | ForEach-Object { ... }`, and use `$doc.Close(0)` so a modal "save changes?" prompt cannot block the run. Where LibreOffice exists, `soffice --headless --convert-to docx in.doc` is the cross-platform equivalent.
+
+### Long documents
+
+Write the markdown to a file instead of pulling hundreds of KB through the chat:
+
+```powershell
+conda run -n pdf-ocr python -m markitdown "C:\path\in.docx" -o "C:\path\out.md"
+```
+
+If that fails with `MissingDependencyException: ... [docx] ... not been installed`, add the per-format extras: `pip install "markitdown[docx,pdf]"`. The MCP server ships with them; a fresh local env does not.
+
 ## 2. Standard OCR: Tesseract (fast)
 
 Ensure the toolchain exists. This is idempotent and safe to re-run:
@@ -87,6 +114,11 @@ Feed the extracted text into the actual task (summarise, search, translate, QA, 
 ## Gotchas
 
 - Never skip markitdown: it is exact and fast; OCR is slow (Tesseract ~1–3 s/page, Unlimited-OCR ~12–60 s/page) and imperfect.
+- Do not hand-roll a `.docx`/`.pptx` XML parser as a workaround. It duplicates markitdown, drops tables and reading order, and invites encoding bugs. If markitdown fails, fix the cause (missing extras, unsupported legacy format) instead of writing a parser.
+- **Text that looks mangled in the terminal is often the console, not the file.** PowerShell's codepage renders Vietnamese/CJK as `?` or `�` even when the saved file is correct UTF-8. Verify with Python before concluding anything:
+  `python -c "import io;t=io.open(r'C:\path\out.md',encoding='utf-8').read();print(len(t), sum(1 for c in t if ord(c)>127))"`
+  A non-trivial non-ASCII count means the extraction is fine; check the file, not the echo.
+- Legacy `.doc` / `.xls` / `.ppt` must be converted to `.docx` / `.xlsx` / `.pptx` first — markitdown does not read the binary formats.
 - Some scans carry a bad OCR text layer, so markitdown returns plausible-but-garbled text. If it reads wrong, ignore it and re-OCR.
 - Match the language code to the document; English-only Tesseract on non-English text produces noise. Unlimited-OCR does not need language selection.
 - Unlimited-OCR is a *repair* tier, not a default. It is 10–40× slower than Tesseract, only worth it when Tesseract is failing, and must not be installed unless the user explicitly asks.
