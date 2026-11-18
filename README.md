@@ -18,6 +18,7 @@ Each skill lives in its own folder with a `SKILL.md` file. Here the folder is re
 
 ### Development and debugging
 - **tdd**: Red-green-refactor test-driven development. Only invoked when asked for
+- **prune-tests**: Delete tests that guard no behavior (the past, nothing, or the implementation)
 - **diagnosing-bugs**: Feedback-loop diagnosis for hard bugs and performance regressions
 - **prototype**: Build throwaway prototypes to explore designs
 - **resolving-merge-conflicts**: Resolve an in-progress git merge or rebase conflict
