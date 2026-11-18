@@ -29,6 +29,7 @@ Each skill lives in its own folder with a `SKILL.md` file. Here the folder is re
 ### Code and architecture
 - **codebase-design**: Shared vocabulary for designing deep modules
 - **improve-codebase-architecture**: Find refactoring opportunities and deepening paths
+- **untangle-codebase**: Refactor the whole codebase in one pass so related pieces live together. User-invoked only
 - **domain-modeling**: Build and sharpen the project's domain model (CONTEXT.md and ADRs)
 - **code-review**: Review changes since a fixed point along Standards and design axes
 - **write-a-skill**: Create new agent skills with proper structure
